@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"net/http"
+
+	"github.com/travis8artley/distributed-api-services/src/internal/router"
+)
 
 func main() {
-    fmt.Println("gateway online")
+	mux := router.NewMux()
+	log.Println("gateway online on :8080")
+	if err := http.ListenAndServe(":8080", mux); err != nil {
+		log.Fatal(err)
+	}
 }
